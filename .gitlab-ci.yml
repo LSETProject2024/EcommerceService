@@ -1,0 +1,32 @@
+image: docker:18.09.7-dind
+
+services:
+  - docker:18.09.7-dind
+
+stages:
+  - build
+  - sonarqube-check
+
+build-master:
+  image: docker:18.09.7-dind
+  stage: build
+  script:
+    - docker login git.futurense.com:5050 -u root -p nG5aAJ2HQ49LVleQ5nP8
+    - docker build -t git.futurense.com:5050/javateam1_2/ecommerceapplication_backend_service .
+    - docker push git.futurense.com:5050/javateam1_2/ecommerceapplication_backend_service
+  tags:
+    - docker
+
+sonarqube-check:
+  image: maven:latest
+  stage: sonarqube-check
+  script:
+    - mvn verify sonar:sonar -Dsonar.qualitygate.wait=true
+  allow_failure: true
+  tags:
+    - docker
+  only:
+    - merge_requests
+    - main
+
+
