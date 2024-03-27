@@ -6,7 +6,7 @@ pipeline {
         git(url: 'https://github.com/LSETProject2024/ecommerceservice.git', branch: 'main', credentialsId: 'LSETProject2024', poll: true)
       }
     }
-    #stage('Build') {
+    #stage('Build skip') {
     # steps {
     #   sh "mvn package"
     # }
