@@ -17,10 +17,11 @@ pipeline {
       steps {
        withSonarQubeEnv(installationName: 'sq1') {
          sh 'mvn clean package sonar:sonar'
-    }
+         }
       }
     }
 stage("Quality Gate"){
+  steps {
           timeout(time: 1, unit: 'HOURS') {
               def qg = waitForQualityGate()
               if (qg.status != 'OK') {
@@ -28,6 +29,7 @@ stage("Quality Gate"){
               }
           }
       }
+}
        stage("Test Application"){
            steps {
                  sh "mvn test"
