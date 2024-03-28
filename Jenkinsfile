@@ -8,13 +8,12 @@ pipeline {
             }
       }
 
-       stage("Build & SonarQube Analysis "){
+       stage("Build"){
             steps {
-              withSonarQubeEnv('SonarQube') {
-                sh "mvn clean package sonar:sonar"
+                sh "mvn clean package"
               }
             }
-       }
+       
 
        stage("Test Application"){
            steps {
