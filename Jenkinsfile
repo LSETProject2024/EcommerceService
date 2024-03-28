@@ -8,7 +8,7 @@ pipeline {
             }
       }
 
-       stage("Build"){
+       stage('Build'){
             steps {
                 sh "mvn clean package"
               }
@@ -17,12 +17,12 @@ pipeline {
   stage('SonarQube analysis') {
     steps {
     withSonarQubeEnv(credentialsId: 'sonarqube_secret', installationName: 'sq1') { // You can override the credential to be used
-      sh 'mvn sonar:sonar'
+      sh "mvn sonar:sonar"
       }
     }
   }
 
-       stage("Test Application"){
+       stage('Test Application'){
            steps {
                  sh "mvn test"
            }
