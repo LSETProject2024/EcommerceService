@@ -17,7 +17,7 @@ pipeline {
   stage('SonarQube analysis') {
     steps {
     withSonarQubeEnv(credentialsId: 'sonarqube_secret', installationName: 'sq1') { // You can override the credential to be used
-      sh 'mvn sonar:sonar'
+      sh 'mvn clean sonar:sonar'
       }
     }
   }
