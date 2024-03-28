@@ -13,13 +13,16 @@ pipeline {
                 sh "mvn clean package"
               }
             }
-    stage("Scan"){
-      steps {
-       withSonarQubeEnv('sq1') {
-         sh 'mvn clean package sonar:sonar'
-         }
-      }
+   node {
+  stage('SCM') {
+    git 'git@github.com:LSETProject2024/ecommerceservice.git'
+  }
+  stage('SonarQube analysis') {
+    withSonarQubeEnv(credentialsId: 'sonarqube_secret', installationName: 'sq1') { // You can override the credential to be used
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
     }
+  }
+}
 
        stage("Test Application"){
            steps {
