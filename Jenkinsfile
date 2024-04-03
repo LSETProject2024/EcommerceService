@@ -14,7 +14,7 @@ pipeline {
               }
             }
   stage('SCM') {
-    stage('SonarQube Analysis') {
+    steps('SonarQube Analysis') {
     def mvn = tool 'Default Maven';
     withSonarQubeEnv('sq') {
       sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ecommerce"
