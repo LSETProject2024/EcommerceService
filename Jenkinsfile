@@ -22,7 +22,7 @@ pipeline {
   stage('Docker Build') {
             steps {
                 script {
-                    docker.build("ecommerce:latest", "."")
+                    docker build("ecommerce:latest", ".")
                     }
             }
         }
