@@ -13,7 +13,6 @@ pipeline {
                 sh ""
               }
             }
-    node {
   stage('SCM') {
     checkout scm
   }
@@ -23,6 +22,5 @@ pipeline {
       sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ecommerce"
     }
   }
-}
   }
 }
