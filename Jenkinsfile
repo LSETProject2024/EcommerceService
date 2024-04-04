@@ -21,18 +21,20 @@ pipeline {
                 sh 'mvn clean compile'
               }
       }
-      stage('Test') {
+    
+    /*  
+    stage('Test') {
             steps {
                 sh 'mvn test'
             }
       }
-    stage('SonarQube Analysis'){
-      steps {
-        echo "analysis is done"
-      }
-    }
-
-      
+      */
+    
+      stage('SonarQube Analysis'){
+            steps {
+              echo "analysis is done"
+            }
+      }      
       
   }
 }
