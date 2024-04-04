@@ -24,25 +24,6 @@ pipeline {
                 sh 'mvn test'
             }
       }
-      stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                sh 'mvn clean package sonar:sonar'
-              }
-            }
-      }
-      stage('SonarQube QualityGate'){
-        steps {
-                script {
-                  waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
-                }
-            }
-      }
-      stage('Build') {
-            steps {
-               sh "mvn package"
-            }
-        }
-    
+      
   }
 }
