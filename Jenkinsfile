@@ -37,7 +37,16 @@ pipeline {
                             -Dsonar.java.binaries=. '''
                 }
             }
-      }      
+      } 
+
+      stage('Quality Gate') {
+            steps {
+                script {
+                  waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
+                }
+            }
+        }
+
       
   }
 }
