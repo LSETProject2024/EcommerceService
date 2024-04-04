@@ -1,10 +1,6 @@
 pipeline {
   agent any
 
-  tools{
-    maven 'maven3'
-  }
-
   environment{
         SCANNER_HOME= tool 'sonar-scanner'
   }  
@@ -25,11 +21,10 @@ pipeline {
             }
       }
       stage('SonarQube Analysis') {
-            steps {
-                 withSonarQubeEnv() {
-                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ecommerceservice"
-                }
-            }
+          def mvn = tool 'Maven3';
+          withSonarQubeEnv() {
+            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ecommerceservice"
+          }
       }
       stage('SonarQube QualityGate'){
         steps {
