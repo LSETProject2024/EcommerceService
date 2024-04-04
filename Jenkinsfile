@@ -4,6 +4,11 @@ pipeline {
   tools{
     maven 'maven3'
   }
+
+  enviornment {
+        SCANNER_HOME= tool 'sonar-scanner'
+    }
+
   
   stages {
       stage('Checkout') {
@@ -21,6 +26,15 @@ pipeline {
                 sh 'mvn test'
             }
       }
-      
+      stage('SonarQube') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=ecommerceservice -Dsonar.projectKey=ecommerceservice \
+                            -Dsonar.java.binaries=. '''
+                }
+            }
+      }
+
+    
   }
 }
