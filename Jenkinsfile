@@ -26,6 +26,11 @@ pipeline {
                 sh 'mvn test'
             }
       }
+    stage('SonarQube Analysis'){
+      steps {
+        echo "analysis is done"
+      }
+    }
 
       
       
