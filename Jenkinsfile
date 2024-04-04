@@ -4,6 +4,10 @@ pipeline {
   environment{
         SCANNER_HOME= tool 'sonar-scanner'
   }  
+  
+  tools{
+    maven 'maven3'
+  }
   stages {
       stage('Checkout') {
             steps {
@@ -22,7 +26,6 @@ pipeline {
       }
       stage('SonarQube Analysis') {
           steps {
-            def mvn = tool 'Default Maven';
             withSonarQubeEnv() {
             sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ecommerceservice"
             }
