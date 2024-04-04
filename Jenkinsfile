@@ -26,13 +26,21 @@ pipeline {
                 sh 'mvn test'
             }
       }
-      stage('SonarQube') {
+      stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=ecommerceservice -Dsonar.projectKey=ecommerceservice \
                             -Dsonar.java.binaries=. '''
                 }
             }
+      }
+      stage('SonarQube QualityGate'){
+        steps {
+                script {
+                  waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
+                }
+            }
+
       }
 
     
