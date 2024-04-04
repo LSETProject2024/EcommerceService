@@ -40,9 +40,12 @@ pipeline {
                   waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
                 }
             }
-
       }
-
+      stage('Build') {
+            steps {
+               sh "mvn package"
+            }
+        }
     
   }
 }
