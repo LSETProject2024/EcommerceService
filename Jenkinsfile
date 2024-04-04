@@ -46,13 +46,13 @@ pipeline {
                 }
             }
         }
-/*
+
         stage('Build') {
             steps {
                sh "mvn package"
             }
         }
-*/
+
         stage('Build & Tag Docker Image') {
             steps {
                script {
