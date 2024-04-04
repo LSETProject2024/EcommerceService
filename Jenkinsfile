@@ -11,9 +11,9 @@ pipeline {
               git branch: 'main', credentialsId: '512fd7be-2f22-4c11-874c-9c20ac94d419', url: 'https://github.com/LSETProject2024/ecommerceservice.git'
             }
       }
-      stage('Build') {
+      stage('Compile') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn compile'
               }
       }
       stage('Test') {
