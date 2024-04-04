@@ -26,9 +26,8 @@ pipeline {
       }
       stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=ecommerceservice -Dsonar.projectKey=ecommerceservice \
-                            -Dsonar.java.binaries=. '''
+                 withSonarQubeEnv() {
+                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ecommerceservice"
                 }
             }
       }
