@@ -8,21 +8,19 @@ pipeline {
   stages {
       stage('Checkout') {
             steps {
-              git(url: 'https://github.com/LSETProject2024/ecommerceservice.git', branch: 'main', credentialsId: 'LSETProject2024', poll: true)
+              git branch: 'main', credentialsId: '512fd7be-2f22-4c11-874c-9c20ac94d419', url: 'https://github.com/LSETProject2024/ecommerceservice.git'
             }
       }
-
-       stage('Build') {
+      stage('Build') {
             steps {
                 sh 'mvn clean package'
               }
-            }
-
-     stage('Test') {
+      }
+      stage('Test') {
             steps {
                 sh 'mvn test'
             }
-        }
+      }
       
   }
 }
