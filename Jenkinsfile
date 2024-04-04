@@ -19,10 +19,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-  stage ('Docker build'){
-            steps {
-                sh 'docker build -t ecommerce .'
-            }
-        }
+      
   }
 }
