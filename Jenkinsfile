@@ -32,7 +32,10 @@ pipeline {
     
       stage('SonarQube Analysis'){
             steps {
-              echo "analysis is done"
+              withSonarQubeEnv('sonar') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=ecommerceservice -Dsonar.projectKey=ecommerceservice \
+                            -Dsonar.java.binaries=. '''
+                }
             }
       }      
       
