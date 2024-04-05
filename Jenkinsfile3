@@ -16,16 +16,11 @@ pipeline {
               git branch: 'main', credentialsId: '512fd7be-2f22-4c11-874c-9c20ac94d419', url: 'https://github.com/LSETProject2024/ecommerceservice.git'
             }
       }
-        stage('Build and push to docker Hub') {
+        stage('Build & Tag Docker Image') {
             steps {
                script {
-                   withDockerRegistry(credentialsId: 'docker-cred',asswordVariable: 'docker_password', usernameVariable: 'docker_name', toolName: 'docker') {
-                      sh '''
-                             docker build -t lsetproject2024/ecommerce .
-                             docker login -u $docker_name -p $docker_password
-                             docker push lsetproject2024/ecommerce
-                         '''
-                  // some block
+                   withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                        sh "docker build -t lsetproject2024/ecommerce:latest ."
                     }
                }
             }
