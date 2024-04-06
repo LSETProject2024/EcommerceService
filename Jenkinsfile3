@@ -85,6 +85,14 @@ stage('Push Docker Image') {
                }
             }
         }
-      
+
+stage('Deploy to K8') {
+            steps {withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://138.68.184.90:6443') {
+    // some block
+                }
+              }
+            }
+        }
+
   }
 }
