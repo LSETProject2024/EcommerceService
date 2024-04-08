@@ -8,8 +8,8 @@ pipeline {
 
   environment{
         SCANNER_HOME= tool 'sonar-scanner'
-  }  
-   
+  }
+  
   stages {
       stage('Checkout') {
             steps {
@@ -97,9 +97,9 @@ pipeline {
                 }
             }
         }
-
-      post {
-        always {
+  }    
+  post {
+    always {
           script {
             def jobName = env.JOB_NAME
             def buildNumber = env.BUILD_NUMBER
@@ -133,5 +133,5 @@ pipeline {
         }
       }    
 
-  }
+  
 }
