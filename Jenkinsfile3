@@ -120,14 +120,14 @@ pipeline {
                 </html>
             """
 
-            emailext (
-                subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
-                body: body,
-                to: 'lsetdevops2024@gmail.com',
-                from: 'jenkins@example.com',
-                replyTo: 'jenkins@example.com',
-                mimeType: 'text/html',
-                attachmentsPattern: 'trivy-image-report.html', 'trivy-fs-report.html'
+          emailext (
+            subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
+            body: body,
+            to: 'lsetdevops2024@gmail.com',
+            from: 'jenkins@example.com',
+            replyTo: 'jenkins@example.com',
+            mimeType: 'text/html',
+            attachmentsPattern: 'trivy-image-report.html, trivy-fs-report.html'
             )
           }
         }
