@@ -4,6 +4,8 @@ pipeline {
   tools {
     jdk 'jdk17'
     maven 'maven3'
+    sonarqube 'sonar-scanner'
+    dockerTool 'docker'
   }
 
   environment{
@@ -17,13 +19,9 @@ pipeline {
             }
       }
 
-      stage('Compile') {
+      stage('Build & Test') {
             steps {
                 sh "mvn compile"
-            }
-      }
-      stage('Test') {
-            steps {
                 sh "mvn test"
             }
         }
