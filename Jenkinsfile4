@@ -16,7 +16,7 @@ pipeline {
               git branch: 'main', credentialsId: '512fd7be-2f22-4c11-874c-9c20ac94d419', url: 'https://github.com/LSETProject2024/ecommerceservice.git'
             }
       }
-      stage('Parallel Stage') {
+      stage('Build&Test') {
             parallel {
                 stage('Build') {
                     steps {
@@ -39,9 +39,6 @@ pipeline {
             }
         }
 
-
-stage('Parallel Stage2') {
-            parallel {
     stage('SonarQube Analysis'){
             steps {
               withSonarQubeEnv('sonar') {
@@ -58,8 +55,7 @@ stage('Parallel Stage2') {
                 }
             }
         }
-    }
-}
+
 
         stage('Build & Tag Docker Image') {
             steps {
